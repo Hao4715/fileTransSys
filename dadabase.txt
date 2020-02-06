@@ -1,0 +1,34 @@
+lsnrctl start
+sqlplus /nolog
+connect /as sysdba
+startup
+
+
+
+
+grant connect,resource to user;
+
+yum -y install binutils compat-libcap1 compat-libstdc++-33 gcc gcc-c++ glibc glibc-devel ksh libaio libaio-devel libgcc libstdc++ libstdc++-devel libXi libXtst make sysstat unixODBC unixODBC-devel
+
+int create_listenfd(void)
+ 11 {
+ 12         int server_fd = socket(AF_INET, SOCK_STREAM, 0);
+ 13         struct sockaddr_in server_addr;
+ 14         bzero(&server_addr,sizeof(server_addr));
+ 15         server_addr.sin_family = AF_INET;
+ 16         server_addr.sin_port = htons(8666);
+ 17         server_addr.sin_addr.s_addr = INADDR_ANY;
+ 18
+ 19         int res = bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr));
+ 20         if(res == -1)
+ 21         {
+ 22                 perror("bind error\n");
+ 23         }
+ 24
+ 25         listen(server_fd,20);
+ 26         return server_fd;
+ 27 }
+
+
+
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
